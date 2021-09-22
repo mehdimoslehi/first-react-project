@@ -32,3 +32,17 @@
   box-sizing: border-box;
   font-size: 20px;
 }
+.dropdown {
+  width: 200px;
+  height: 40px;
+  margin-top: 20px;
+}
+.hidden {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
+input {
+  margin: 5px 5px 0 0;
+}
