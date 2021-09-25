@@ -21,7 +21,7 @@ export function Dropdown() {
     setAddValue(e.target.value);
   };
   const handelAddToList = () => {
-    setProducts([...products,{name: addValue,desc: descValue}]);
+    setProducts([...products, { name: addValue, desc: descValue }]);
     setAddValue("");
     setDescValue("");
   };
@@ -55,9 +55,30 @@ export function Dropdown() {
           onChange={search}
         />
         {products
-          .filter((item) => (item.name.toLowerCase().includes(searchValue)||item.desc.toLowerCase().includes(searchValue)))
+          .filter(
+            (item) =>
+              item.name.toLowerCase().includes(searchValue) ||
+              item.desc.toLowerCase().includes(searchValue)
+          )
           .map((item, index) => (
-            <p key={index}>{item.name}, { item.desc}</p>
+            <p key={index}>
+              {item.name}, {item.desc}
+            </p>
+          ))}
+      </div>
+      <div className="card-container">
+        {products
+          .filter(
+            (item) =>
+              item.name.toLowerCase().includes(searchValue) ||
+              item.desc.toLowerCase().includes(searchValue)
+          )
+          .map((item) => (
+            <div className="card-2">
+              <img src="https://picsum.photos/100/100" />
+              <p>{item.name}</p>
+              <p>{item.desc}</p>
+            </div>
           ))}
       </div>
     </div>
