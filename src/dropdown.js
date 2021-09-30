@@ -3,15 +3,17 @@ import "./style.css";
 
 export function Dropdown() {
   const [products, setProducts] = useState([
-    "shirt1",
-    "t-shirt",
-    "shoos",
-    "slipers",
-    "jeans",
+    { name: "shirt1", desc: "blue" },
+    { name: "t-shirt1", desc: "red" },
+    { name: "shoos", desc: "white" },
+    { name: "slipers", desc: "black" },
+    { name: "jeans", desc: "pink" },
   ]);
   const [mainDivClass, setmainDivClass] = useState("hidden");
   const [searchValue, setSearchValue] = useState("");
   const [addValue, setAddValue] = useState("");
+  const [descValue, setDescValue] = useState("");
+
   const showHide = () => {
     setmainDivClass(mainDivClass === "hidden" ? "visible" : "hidden");
   };
@@ -19,13 +21,17 @@ export function Dropdown() {
     setAddValue(e.target.value);
   };
   const handelAddToList = () => {
-    setProducts([...products, addValue]);
+    setProducts([...products, { name: addValue, desc: descValue }]);
     setAddValue("");
+    setDescValue("");
   };
   const search = (e) => {
     setSearchValue(e.target.value);
     console.log(searchValue);
   };
+
+  const addDesc = (e) => setDescValue(e.target.value);
+
   return (
     <div>
       <button className="dropdown" onClick={showHide}>
@@ -34,6 +40,13 @@ export function Dropdown() {
       <div className={mainDivClass}>
         <input placeholder="addToList" value={addValue} onChange={addToList} />
         <button onClick={handelAddToList}>Add</button> <br />
+        <textarea
+          className="text-area"
+          placeholder="desciption"
+          value={descValue}
+          onChange={addDesc}
+        ></textarea>{" "}
+        <br />
         <input
           className="search-input"
           type="search"
@@ -42,9 +55,30 @@ export function Dropdown() {
           onChange={search}
         />
         {products
-          .filter((item) => item.toLowerCase().includes(searchValue))
-          .map((value, index) => (
-            <p key={index}>{value}</p>
+          .filter(
+            (item) =>
+              item.name.toLowerCase().includes(searchValue) ||
+              item.desc.toLowerCase().includes(searchValue)
+          )
+          .map((item, index) => (
+            <p key={index}>
+              {item.name}, {item.desc}
+            </p>
+          ))}
+      </div>
+      <div className="card-container">
+        {products
+          .filter(
+            (item) =>
+              item.name.toLowerCase().includes(searchValue) ||
+              item.desc.toLowerCase().includes(searchValue)
+          )
+          .map((item) => (
+            <div className="card-2">
+              <img src="https://picsum.photos/100/100" />
+              <p>{item.name}</p>
+              <p>{item.desc}</p>
+            </div>
           ))}
       </div>
     </div>
